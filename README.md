@@ -1,5 +1,7 @@
 # Retail Analytics Copilot
 
+A Hybrid RAG + SQL agent powered by DSPy and LangGraph.
+
 A local AI agent that answers retail analytics questions using RAG over documentation and SQL queries over the Northwind SQLite database. Built with DSPy and LangGraph.
 
 ## Performance Results
