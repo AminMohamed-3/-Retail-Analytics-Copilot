@@ -1,0 +1,63 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs and traces
+logs/
+traces/
+*.log
+
+# Data files (if large)
+# Uncomment if you don't want to commit the database
+# data/*.sqlite
+# data/*.db
+
+# Metrics and outputs
+metrics/
+*.jsonl
+outputs*.jsonl
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment variables
+.env
+.env.local
+
+# Charts (if generated)
+charts/*.png
+charts/*.jpg
+charts/*.svg
+
