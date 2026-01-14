@@ -1,0 +1,77 @@
+{
+  "sql_generator": {
+    "traces": [],
+    "train": [],
+    "demos": [
+      {
+        "augmented": true,
+        "question": "How many orders were placed in 1997?",
+        "schema_info": "DATABASE SCHEMA:\n==================================================\n\norders (view):\n  Columns: OrderID, CustomerID, EmployeeID, OrderDate, RequiredDate, ShippedDate, ShipVia, Freight, ShipName, ShipAddress, ShipCity, ShipRegion, ShipPostalCode, ShipCountry\n\norder_items (view):\n  Columns: OrderID, ProductID, UnitPrice, Quantity, Discount\n\nproducts (view):\n  Columns: ProductID, ProductName, SupplierID, CategoryID, QuantityPerUnit, UnitPrice, UnitsInStock, UnitsOnOrder, ReorderLevel, Discontinued\n\ncustomers (view):\n  Columns: CustomerID, CompanyName, ContactName, ContactTitle, Address, City, Region, PostalCode, Country, Phone, Fax\n\nCategories (table):\n  Columns: CategoryID, CategoryName, Description, Picture\n\nJOINS:\n  orders o JOIN order_items od ON o.OrderID = od.OrderID\n  order_items od JOIN products p ON od.ProductID = p.ProductID\n  products p JOIN Categories cat ON p.CategoryID = cat.CategoryID\n  orders o JOIN customers c ON o.CustomerID = c.CustomerID\n\nALIASES: o=orders, od=order_items, p=products, cat=Categories, c=customers\nREVENUE: SUM(od.UnitPrice * od.Quantity * (1 - od.Discount))",
+        "context": "DB dates are shifted +20 years (1997->2017).",
+        "sql_query": "SELECT COUNT(*) FROM orders WHERE OrderDate BETWEEN '2017-01-01' AND '2017-12-31'"
+      },
+      {
+        "augmented": true,
+        "question": "What was the average order value in December 1997?",
+        "schema_info": "DATABASE SCHEMA:\n==================================================\n\norders (view):\n  Columns: OrderID, CustomerID, EmployeeID, OrderDate, RequiredDate, ShippedDate, ShipVia, Freight, ShipName, ShipAddress, ShipCity, ShipRegion, ShipPostalCode, ShipCountry\n\norder_items (view):\n  Columns: OrderID, ProductID, UnitPrice, Quantity, Discount\n\nproducts (view):\n  Columns: ProductID, ProductName, SupplierID, CategoryID, QuantityPerUnit, UnitPrice, UnitsInStock, UnitsOnOrder, ReorderLevel, Discontinued\n\ncustomers (view):\n  Columns: CustomerID, CompanyName, ContactName, ContactTitle, Address, City, Region, PostalCode, Country, Phone, Fax\n\nCategories (table):\n  Columns: CategoryID, CategoryName, Description, Picture\n\nJOINS:\n  orders o JOIN order_items od ON o.OrderID = od.OrderID\n  order_items od JOIN products p ON od.ProductID = p.ProductID\n  products p JOIN Categories cat ON p.CategoryID = cat.CategoryID\n  orders o JOIN customers c ON o.CustomerID = c.CustomerID\n\nALIASES: o=orders, od=order_items, p=products, cat=Categories, c=customers\nREVENUE: SUM(od.UnitPrice * od.Quantity * (1 - od.Discount))",
+        "context": "Marketing Calendar: Winter Classics 1997 = 2017-12-01 to 2017-12-31. Revenue = SUM(od.UnitPrice * od.Quantity * (1 - od.Discount)). AOV = Revenue / COUNT(DISTINCT o.OrderID).",
+        "sql_query": "SELECT AVG(od.UnitPrice * od.Quantity) AS AverageOrderValue FROM orders o JOIN order_items od ON o.OrderID = od.OrderID WHERE o.OrderDate BETWEEN '2017-12-01' AND '2017-12-31'"
+      },
+      {
+        "augmented": true,
+        "question": "Orders placed between June and August 1997",
+        "schema_info": "DATABASE SCHEMA:\n==================================================\n\norders (view):\n  Columns: OrderID, CustomerID, EmployeeID, OrderDate, RequiredDate, ShippedDate, ShipVia, Freight, ShipName, ShipAddress, ShipCity, ShipRegion, ShipPostalCode, ShipCountry\n\norder_items (view):\n  Columns: OrderID, ProductID, UnitPrice, Quantity, Discount\n\nproducts (view):\n  Columns: ProductID, ProductName, SupplierID, CategoryID, QuantityPerUnit, UnitPrice, UnitsInStock, UnitsOnOrder, ReorderLevel, Discontinued\n\ncustomers (view):\n  Columns: CustomerID, CompanyName, ContactName, ContactTitle, Address, City, Region, PostalCode, Country, Phone, Fax\n\nCategories (table):\n  Columns: CategoryID, CategoryName, Description, Picture\n\nJOINS:\n  orders o JOIN order_items od ON o.OrderID = od.OrderID\n  order_items od JOIN products p ON od.ProductID = p.ProductID\n  products p JOIN Categories cat ON p.CategoryID = cat.CategoryID\n  orders o JOIN customers c ON o.CustomerID = c.CustomerID\n\nALIASES: o=orders, od=order_items, p=products, cat=Categories, c=customers\nREVENUE: SUM(od.UnitPrice * od.Quantity * (1 - od.Discount))",
+        "context": "DB dates shifted +20 years.",
+        "sql_query": "SELECT o.OrderID, SUM(od.UnitPrice * od.Quantity * (1 - od.Discount)) AS TotalRevenue FROM orders o JOIN order_items od ON o.OrderID = od.OrderID WHERE o.OrderDate BETWEEN '1977-06-01' AND '1977-08-31'"
+      },
+      {
+        "augmented": true,
+        "question": "List all products in the Seafood category",
+        "schema_info": "DATABASE SCHEMA:\n==================================================\n\norders (view):\n  Columns: OrderID, CustomerID, EmployeeID, OrderDate, RequiredDate, ShippedDate, ShipVia, Freight, ShipName, ShipAddress, ShipCity, ShipRegion, ShipPostalCode, ShipCountry\n\norder_items (view):\n  Columns: OrderID, ProductID, UnitPrice, Quantity, Discount\n\nproducts (view):\n  Columns: ProductID, ProductName, SupplierID, CategoryID, QuantityPerUnit, UnitPrice, UnitsInStock, UnitsOnOrder, ReorderLevel, Discontinued\n\ncustomers (view):\n  Columns: CustomerID, CompanyName, ContactName, ContactTitle, Address, City, Region, PostalCode, Country, Phone, Fax\n\nCategories (table):\n  Columns: CategoryID, CategoryName, Description, Picture\n\nJOINS:\n  orders o JOIN order_items od ON o.OrderID = od.OrderID\n  order_items od JOIN products p ON od.ProductID = p.ProductID\n  products p JOIN Categories cat ON p.CategoryID = cat.CategoryID\n  orders o JOIN customers c ON o.CustomerID = c.CustomerID\n\nALIASES: o=orders, od=order_items, p=products, cat=Categories, c=customers\nREVENUE: SUM(od.UnitPrice * od.Quantity * (1 - od.Discount))",
+        "context": "",
+        "sql_query": "SELECT p.ProductName FROM products p JOIN Categories cat ON p.CategoryID = cat.CategoryID WHERE cat.CategoryName = 'Seafood'"
+      },
+      {
+        "question": "Total revenue for Summer Beverages 1997",
+        "schema_info": "DATABASE SCHEMA:\n==================================================\n\norders (view):\n  Columns: OrderID, CustomerID, EmployeeID, OrderDate, RequiredDate, ShippedDate, ShipVia, Freight, ShipName, ShipAddress, ShipCity, ShipRegion, ShipPostalCode, ShipCountry\n\norder_items (view):\n  Columns: OrderID, ProductID, UnitPrice, Quantity, Discount\n\nproducts (view):\n  Columns: ProductID, ProductName, SupplierID, CategoryID, QuantityPerUnit, UnitPrice, UnitsInStock, UnitsOnOrder, ReorderLevel, Discontinued\n\ncustomers (view):\n  Columns: CustomerID, CompanyName, ContactName, ContactTitle, Address, City, Region, PostalCode, Country, Phone, Fax\n\nCategories (table):\n  Columns: CategoryID, CategoryName, Description, Picture\n\nJOINS:\n  orders o JOIN order_items od ON o.OrderID = od.OrderID\n  order_items od JOIN products p ON od.ProductID = p.ProductID\n  products p JOIN Categories cat ON p.CategoryID = cat.CategoryID\n  orders o JOIN customers c ON o.CustomerID = c.CustomerID\n\nALIASES: o=orders, od=order_items, p=products, cat=Categories, c=customers\nREVENUE: SUM(od.UnitPrice * od.Quantity * (1 - od.Discount))",
+        "context": "Marketing Calendar: Summer Beverages 1997 = 2017-06-01 to 2017-06-30. Revenue = SUM(od.UnitPrice * od.Quantity * (1 - od.Discount)). AOV = Revenue / COUNT(DISTINCT o.OrderID).",
+        "sql_query": "SELECT SUM(od.UnitPrice * od.Quantity * (1 - od.Discount)) FROM orders o JOIN order_items od ON o.OrderID = od.OrderID JOIN products p ON od.ProductID = p.ProductID JOIN Categories cat ON p.CategoryID = cat.CategoryID WHERE cat.CategoryName = 'Beverages' AND o.OrderDate BETWEEN '2017-06-01' AND '2017-06-30'"
+      },
+      {
+        "question": "What is the total discount given on all orders?",
+        "schema_info": "DATABASE SCHEMA:\n==================================================\n\norders (view):\n  Columns: OrderID, CustomerID, EmployeeID, OrderDate, RequiredDate, ShippedDate, ShipVia, Freight, ShipName, ShipAddress, ShipCity, ShipRegion, ShipPostalCode, ShipCountry\n\norder_items (view):\n  Columns: OrderID, ProductID, UnitPrice, Quantity, Discount\n\nproducts (view):\n  Columns: ProductID, ProductName, SupplierID, CategoryID, QuantityPerUnit, UnitPrice, UnitsInStock, UnitsOnOrder, ReorderLevel, Discontinued\n\ncustomers (view):\n  Columns: CustomerID, CompanyName, ContactName, ContactTitle, Address, City, Region, PostalCode, Country, Phone, Fax\n\nCategories (table):\n  Columns: CategoryID, CategoryName, Description, Picture\n\nJOINS:\n  orders o JOIN order_items od ON o.OrderID = od.OrderID\n  order_items od JOIN products p ON od.ProductID = p.ProductID\n  products p JOIN Categories cat ON p.CategoryID = cat.CategoryID\n  orders o JOIN customers c ON o.CustomerID = c.CustomerID\n\nALIASES: o=orders, od=order_items, p=products, cat=Categories, c=customers\nREVENUE: SUM(od.UnitPrice * od.Quantity * (1 - od.Discount))",
+        "context": "",
+        "sql_query": "SELECT SUM(od.UnitPrice * od.Quantity * od.Discount) FROM order_items od"
+      }
+    ],
+    "signature": {
+      "instructions": "Generate SQLite SQL query from natural language question.\n\nRULES:\n1. ALIASES: c=customers, cat=Categories, p=products, o=orders, od=order_items\n2. DATES: Use o.OrderDate BETWEEN 'YYYY-MM-DD' AND 'YYYY-MM-DD' (no strftime)\n3. Categories has CategoryName; Customers has CompanyName\n4. Revenue = SUM(od.UnitPrice * od.Quantity * (1 - od.Discount))\n5. AOV = Revenue / COUNT(DISTINCT o.OrderID)\n6. Gross Margin = Revenue - (0.7 * Revenue) when cost unknown",
+      "fields": [
+        {
+          "prefix": "Question:",
+          "description": "The user's question"
+        },
+        {
+          "prefix": "Schema Info:",
+          "description": "Database schema information"
+        },
+        {
+          "prefix": "Context:",
+          "description": "Additional context (dates, KPIs)"
+        },
+        {
+          "prefix": "Sql Query:",
+          "description": "Valid SQLite SQL query only"
+        }
+      ]
+    },
+    "lm": null
+  },
+  "metadata": {
+    "dependency_versions": {
+      "python": "3.12",
+      "dspy": "3.0.4",
+      "cloudpickle": "3.1"
+    }
+  }
+}

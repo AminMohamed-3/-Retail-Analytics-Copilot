@@ -1,0 +1,73 @@
+{
+  "classifier.predict": {
+    "traces": [],
+    "train": [],
+    "demos": [
+      {
+        "augmented": true,
+        "question": "What is the KPI definition of AOV?",
+        "reasoning": "The question is asking about a business or financial metric. Average Order Value (AOV) refers to the average amount of money that each customer spends per transaction in an online store, e-commerce website, mobile app, etc., over a specific period. It's typically used as a key performance indicator for retailers and marketers who want to understand their customers’ purchasing behavior or measure how well they are growing revenue from existing sales channels without increasing customer acquisition costs (CAC).",
+        "query_type": "rag"
+      },
+      {
+        "augmented": true,
+        "question": "Top 3 products by total revenue all-time",
+        "reasoning": "The question is asking to retrieve a list of products based on their total revenue, which likely involves analyzing sales data from an SQL database. This task requires both understanding what information needs to be extracted (total revenues for each product) and potentially querying the relevant tables in a relational database management system where such financial metrics are stored.",
+        "query_type": "sql"
+      },
+      {
+        "augmented": true,
+        "question": "What is the average order value?",
+        "reasoning": "The question is asking to retrieve a specific metric (average order value) from data, which likely involves analyzing sales or transactional information. This could involve querying an SQL database containing customer orders and calculating the average of some numerical values related to those transactions within specified parameters such as time frame ('Summer Beverages 1997').",
+        "query_type": "sql"
+      },
+      {
+        "augmented": true,
+        "question": "During Summer Beverages 1997, which category had highest quantity?",
+        "reasoning": "The question is asking to retrieve a specific metric (quantity) from potentially multiple categories within a dataset, likely involving both data retrieval and analysis. This suggests that it requires querying or analyzing structured data which could involve SQL for database interaction as well as understanding the context of 'Summer Beverages 1997' possibly referring to sales records in an e-commerce system (rag), along with some form of aggregation function like SUM, GROUP BY and filtering by date range.",
+        "query_type": "hybrid"
+      },
+      {
+        "question": "Per the KPI definition of gross margin, who was the top customer by gross margin in 1997?",
+        "query_type": "hybrid"
+      },
+      {
+        "question": "Total revenue from Beverages category during Summer Beverages 1997 dates",
+        "query_type": "hybrid"
+      },
+      {
+        "question": "What categories are mentioned in the catalog?",
+        "query_type": "rag"
+      },
+      {
+        "question": "List all customers from USA",
+        "query_type": "sql"
+      }
+    ],
+    "signature": {
+      "instructions": "Classify question type: rag (doc-only), sql (db-only), or hybrid (both).",
+      "fields": [
+        {
+          "prefix": "Question:",
+          "description": "The user's question"
+        },
+        {
+          "prefix": "Reasoning: Let's think step by step in order to",
+          "description": "${reasoning}"
+        },
+        {
+          "prefix": "Query Type:",
+          "description": "One of: 'rag', 'sql', or 'hybrid'"
+        }
+      ]
+    },
+    "lm": null
+  },
+  "metadata": {
+    "dependency_versions": {
+      "python": "3.12",
+      "dspy": "3.0.4",
+      "cloudpickle": "3.1"
+    }
+  }
+}
